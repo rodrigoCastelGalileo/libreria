@@ -6,8 +6,6 @@
 
 using namespace std;
 
-int i;
-
 void pause()
 {
     cout << "\n\nPresiona ENTER para salir...";
@@ -73,7 +71,6 @@ int main()
 
     cout << "Codigos generados: " << endl;
     imprimirArreglo(codigos);
-    vector<int> codigosArreglado = codigos;
 
     cout << "ingrese una opcion del 1 al 4" << endl;
     cout << "1. Buble Sort." << endl;
@@ -91,10 +88,14 @@ int main()
         /* code */
         break;
     case 3:
+    {
+        // importante esta primera linea, para tener una copia limpia del arreglo original, cada vez que se inicie un nuevo tipo de ordenamiento
+        vector<int> codigosArreglado = codigos;
         insertionSort(codigosArreglado.data(), codigosArreglado.size());
         cout << "El arreglo ordenado con Insertion sort seria: " << endl;
         imprimirArreglo(codigosArreglado);
         break;
+    }
     case 4:
         /* code */
         break;

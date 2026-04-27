@@ -39,6 +39,29 @@ void insertionSort(int arr[], int n)
     cout << "Se contabilizaron " << cambios << " cambios de posicion." << endl;
 }
 
+void bubleSort(int arr[], int n)
+{
+    int cambios = 0;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+
+                cambios++;
+            }
+        }
+    }
+
+    cout << "Para ordenar " << n << " elementos, se realizaron "
+         << cambios << " intercambios de posicion." << endl;
+}
+
 void imprimirArreglo(const vector<int> &n)
 {
     for (size_t i = 0; i < n.size(); i++)
@@ -50,7 +73,7 @@ int main()
 {
     int libros, opcion;
 
-    cout << "ingres la cantidad de libros: ";
+    cout << "Ingrese la cantidad de libros: ";
     cin >> libros;
 
     vector<int> codigos(libros);
@@ -76,20 +99,24 @@ int main()
     cout << "1. Buble Sort." << endl;
     cout << "2. Selection Sort." << endl;
     cout << "3. Insertion Sort." << endl;
-    cout << "4. Verificacion de Eficiencia." << endl;
+    cout << "4. Busqueda de un Libro." << endl;
     cin >> opcion;
 
     switch (opcion)
     {
     case 1:
-        /* code */
+    {
+        vector<int> codigosArreglado = codigos;
+        bubleSort(codigosArreglado.data(), codigosArreglado.size());
+        cout << "El arreglo ordenado con Buble sort seria: " << endl;
+        imprimirArreglo(codigosArreglado);
         break;
+    }
     case 2:
         /* code */
         break;
     case 3:
     {
-        // importante esta primera linea, para tener una copia limpia del arreglo original, cada vez que se inicie un nuevo tipo de ordenamiento
         vector<int> codigosArreglado = codigos;
         insertionSort(codigosArreglado.data(), codigosArreglado.size());
         cout << "El arreglo ordenado con Insertion sort seria: " << endl;

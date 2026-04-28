@@ -1,3 +1,5 @@
+// Grupo integrado por: Alfredo, Maria Jose, Rodrigo y Erick
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>

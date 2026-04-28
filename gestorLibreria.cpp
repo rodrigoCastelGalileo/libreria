@@ -62,6 +62,65 @@ void bubleSort(int arr[], int n)
          << cambios << " intercambios de posicion." << endl;
 }
 
+void selectionSort(int arr[], int n)
+{
+    int intercambios = 0;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        int minIndex = i;
+
+        for (int j = i + 1; j < n; j++)
+        {
+            if (arr[j] < arr[minIndex])
+            {
+                minIndex = j;
+            }
+        }
+
+        if (minIndex != i)
+        {
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+            intercambios++;
+        }
+    }
+
+    cout << "Para ordenar " << n
+         << " elementos, se realizaron "
+         << intercambios
+         << " intercambios de posicion." << endl;
+}
+
+void busquedaBinaria(int lista[], int size, int buscar)
+{
+    int bajo = 0;
+    int alto = size - 1;
+
+    while (bajo <= alto)
+    {
+        int mitad = (bajo + alto) / 2;
+
+        if (lista[mitad] == buscar)
+        {
+            cout << "El libro SI existe en el inventario." << endl;
+            cout << "Se encuentra en el indice: " << mitad << endl;
+            return;
+        }
+        else if (lista[mitad] < buscar)
+        {
+            bajo = mitad + 1;
+        }
+        else
+        {
+            alto = mitad - 1;
+        }
+    }
+
+    cout << "El libro NO esta en el inventario." << endl;
+}
+
 void imprimirArreglo(const vector<int> &n)
 {
     for (size_t i = 0; i < n.size(); i++)
@@ -113,8 +172,13 @@ int main()
         break;
     }
     case 2:
-        /* code */
+    {
+        vector<int> codigosArreglado = codigos;
+        selectionSort(codigosArreglado.data(), codigosArreglado.size());
+        cout << "El arreglo ordenado con Selection sort seria: " << endl;
+        imprimirArreglo(codigosArreglado);
         break;
+    }
     case 3:
     {
         vector<int> codigosArreglado = codigos;
@@ -124,8 +188,43 @@ int main()
         break;
     }
     case 4:
-        /* code */
+    {
+        int buscar, tipoOrden;
+
+        cout << "Seleccione el metodo de ordenamiento:" << endl;
+        cout << "1. Bubble Sort" << endl;
+        cout << "2. Selection Sort" << endl;
+        cout << "3. Insertion Sort" << endl;
+        cin >> tipoOrden;
+
+        vector<int> codigosOrdenados = codigos;
+
+        switch (tipoOrden)
+        {
+        case 1:
+            bubleSort(codigosOrdenados.data(), codigosOrdenados.size());
+            break;
+        case 2:
+            selectionSort(codigosOrdenados.data(), codigosOrdenados.size());
+            break;
+        case 3:
+            insertionSort(codigosOrdenados.data(), codigosOrdenados.size());
+            break;
+        default:
+            cout << "Opcion invalida." << endl;
+            break;
+        }
+
+        cout << "Arreglo ordenado: " << endl;
+        imprimirArreglo(codigosOrdenados);
+
+        cout << "Ingrese el codigo del libro a buscar: ";
+        cin >> buscar;
+
+        busquedaBinaria(codigosOrdenados.data(), codigosOrdenados.size(), buscar);
+
         break;
+    }
     default:
         cout << "Opcion invalida." << endl;
         break;
